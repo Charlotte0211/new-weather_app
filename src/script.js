@@ -2,7 +2,12 @@ function displayTemperature(response) {
   let temperature = document.querySelector("#current-temperature");
   let currentTemperature = response.data.temperature.current;
   let city = document.querySelector("#current-city");
-  city.innerHTML = response.data.city;
+  let weatherDescription = document.querySelector("#weather-description");
+  let humidity = document.querySelector("#humidity");
+  humidity.innerHTML = response.data.temperature.humidity;
+
+  weatherDescription.innerHTML = response.data.condition.description;
+  weatherDescription = city.innerHTML = response.data.city;
   temperature.innerHTML = Math.round(currentTemperature);
 }
 
@@ -21,4 +26,4 @@ function handleSearchSubmit(event) {
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", handleSearchSubmit);
 
-searchCity("Paris");
+searchCity("Winchburgh");
