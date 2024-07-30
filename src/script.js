@@ -7,30 +7,14 @@ function displayTemperature(response) {
   let currentHumidity = response.data.temperature.humidity;
   let wind = document.querySelector("#wind");
   let currentWind = response.data.wind.speed;
+  let icon = document.querySelector("#icon");
+  console.log(icon);
   wind.innerHTML = Math.round(currentWind);
-
   humidity.innerHTML = Math.round(currentHumidity);
   weatherDescription.innerHTML = response.data.condition.description;
   city.innerHTML = response.data.city;
   temperature.innerHTML = Math.round(currentTemperature);
-}
-
-function ordinal(number) {
-  number = Number(number);
-  if (!number || Math.round(number) !== number) {
-    return number;
-  }
-  var signal = number < 20 ? number : Number(("" + number).slice(-1));
-  switch (signal) {
-    case 1:
-      return number + "st";
-    case 2:
-      return number + "nd";
-    case 3:
-      return number + "rd";
-    default:
-      return number + "th";
-  }
+  icon.innerHTML = `<img.src="${response.data.condition.icon_url}" class="weather-app-icon">`;
 }
 
 function dateFormat(date) {
@@ -75,9 +59,7 @@ function dateFormat(date) {
   let monthFormatted = months[month];
 
   let dayFormatted = days[day];
-  return `${dayFormatted} ${day(
-    dateFormat
-  )} ${monthFormatted},${hours}:${minutes}`;
+  return `${dayFormatted} ${day} ${monthFormatted},${hours}:${minutes}`;
 }
 
 function searchCity(city) {
@@ -99,4 +81,4 @@ let currentDate = document.querySelector("#current-date");
 let date = new Date();
 currentDate.innerHTML = dateFormat(date);
 
-searchCity("Winchburgh");
+searchCity("Madrid");
