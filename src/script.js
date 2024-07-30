@@ -4,11 +4,80 @@ function displayTemperature(response) {
   let city = document.querySelector("#current-city");
   let weatherDescription = document.querySelector("#weather-description");
   let humidity = document.querySelector("#humidity");
-  humidity.innerHTML = response.data.temperature.humidity;
+  let currentHumidity = response.data.temperature.humidity;
+  let wind = document.querySelector("#wind");
+  let currentWind = response.data.wind.speed;
+  wind.innerHTML = Math.round(currentWind);
 
+  humidity.innerHTML = Math.round(currentHumidity);
   weatherDescription.innerHTML = response.data.condition.description;
-  weatherDescription = city.innerHTML = response.data.city;
+  city.innerHTML = response.data.city;
   temperature.innerHTML = Math.round(currentTemperature);
+}
+
+function ordinal(number) {
+  number = Number(number);
+  if (!number || Math.round(number) !== number) {
+    return number;
+  }
+  var signal = number < 20 ? number : Number(("" + number).slice(-1));
+  switch (signal) {
+    case 1:
+      return number + "st";
+    case 2:
+      return number + "nd";
+    case 3:
+      return number + "rd";
+    default:
+      return number + "th";
+  }
+}
+
+function dateFormat(date) {
+  let minutes = date.getMinutes();
+  let hours = date.getHours();
+  let day = date.getDay();
+  let month = date.getMonth();
+
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  let monthFormatted = months[month];
+
+  let dayFormatted = days[day];
+  return `${dayFormatted} ${day(
+    dateFormat
+  )} ${monthFormatted},${hours}:${minutes}`;
 }
 
 function searchCity(city) {
@@ -25,5 +94,9 @@ function handleSearchSubmit(event) {
 
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", handleSearchSubmit);
+
+let currentDate = document.querySelector("#current-date");
+let date = new Date();
+currentDate.innerHTML = dateFormat(date);
 
 searchCity("Winchburgh");
