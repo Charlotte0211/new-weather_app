@@ -7,11 +7,6 @@ a {
   color: #f492bd;
 }
 
-.rainbow-image {
-  height: 60px;
-  width: 60px;
-}
-
 .weather-app {
   background: white;
 
@@ -77,9 +72,11 @@ main {
   color: #f65282;
 }
 
-.icon {
+.weather-app-icon {
   height: 80px;
   width: 80px;
+  position: relative;
+  top: -20px;
 }
 
 .current-temperature-value {

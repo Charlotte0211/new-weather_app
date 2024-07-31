@@ -7,14 +7,13 @@ function displayTemperature(response) {
   let currentHumidity = response.data.temperature.humidity;
   let wind = document.querySelector("#wind");
   let currentWind = response.data.wind.speed;
-  let icon = document.querySelector("#icon");
-  console.log(icon);
+  let icon = document.querySelector("#weather-app-icon");
   wind.innerHTML = Math.round(currentWind);
   humidity.innerHTML = Math.round(currentHumidity);
   weatherDescription.innerHTML = response.data.condition.description;
   city.innerHTML = response.data.city;
   temperature.innerHTML = Math.round(currentTemperature);
-  icon.innerHTML = `<img.src="${response.data.condition.icon_url}" class="weather-app-icon">`;
+  icon.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-app-icon">`;
 }
 
 function dateFormat(date) {
